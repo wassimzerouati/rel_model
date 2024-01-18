@@ -1,0 +1,12 @@
+{
+  "labels":[
+    "PERSON",
+    "CARDINAL",
+    "MONEY",
+    "DIVIDED_INTO",
+    "OWNED_BY",
+    "STATUS_TYPE",
+    "SHARE_AMOUNT"
+  ],
+  "threshold":0.5
+}

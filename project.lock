@@ -1,0 +1,53 @@
+data:
+  cmd: python -m spacy run data
+  script:
+    - python ./scripts/parse_data.py assets/annotations.jsonl data/train.spacy data/dev.spacy
+      data/test.spacy
+  deps:
+    - path: assets/annotations.jsonl
+      md5: 1ebc62ecb9d4a2c4b4e78e6ee18db2ff
+  outs:
+    - path: data/train.spacy
+      md5: e77a6e27e2dc30accb80b5a3d4840b34
+    - path: data/dev.spacy
+      md5: e77a6e27e2dc30accb80b5a3d4840b34
+    - path: data/test.spacy
+      md5: e77a6e27e2dc30accb80b5a3d4840b34
+  spacy_version: 3.6.1
+  spacy_git_version: 458bc5f45
+train_cpu:
+  cmd: python -m spacy run train_cpu
+  script:
+    - python -m spacy train configs/rel_tok2vec.cfg --output training --paths.train
+      data/relation_training.spacy --paths.dev data/relation_dev.spacy -c ./scripts/custom_functions.py
+  deps:
+    - path: data/relation_training.spacy
+      md5: 606507d827a0c73d581d208dd11157ea
+    - path: data/relation_dev.spacy
+      md5: 606507d827a0c73d581d208dd11157ea
+  outs:
+    - path: training/model-best
+      md5: 2ba15012287c43bce6b6fafabfd7a88b
+  spacy_version: 3.6.1
+  spacy_git_version: 458bc5f45
+evaluate:
+  cmd: python -m spacy run evaluate
+  script:
+    - python ./scripts/evaluate.py training/model-best data/test.spacy False
+  deps:
+    - path: training/model-best
+      md5: 7081c5e7da746561dbf680c36ada3db8
+    - path: data/test.spacy
+      md5: f8068e2d934af0322752a0c776ad00a2
+  outs: []
+  spacy_version: 3.6.1
+  spacy_git_version: 458bc5f45
+clean:
+  cmd: python -m spacy run clean
+  script:
+    - rm -rf data/*
+    - rm -rf training/*
+  deps: []
+  outs: []
+  spacy_version: 3.6.1
+  spacy_git_version: 458bc5f45
