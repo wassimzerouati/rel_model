@@ -125,6 +125,6 @@ def main(json_loc: Path, train_file: Path):
     )
 
 
-ann = Path("data/relation_training.txt")
-train_file=Path('data/relation_training.spacy')
+ann = Path("data/relation_test.txt")
+train_file=Path('data/relation_test.spacy')
 main(ann, train_file)

@@ -3,10 +3,12 @@
     "PERSON",
     "CARDINAL",
     "MONEY",
-    "DIVIDED_INTO",
+    "DATE",
+    "STATUS",
     "OWNED_BY",
-    "STATUS_TYPE",
-    "SHARE_AMOUNT"
+    "SHARE_AMOUNT",
+    "DIVIDED_INTO",
+    "STATUS_TYPE"
   ],
   "threshold":0.5
 }
